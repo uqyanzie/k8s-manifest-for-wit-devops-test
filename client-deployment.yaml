@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: client-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            component: client
+    template:
+        metadata:
+            labels:
+                component: client
+        spec:
+            containers:
+                -   name: client
+                    image: uqyanzie/wit-todo-fe
+                    ports:
+                        -   containerPort: 3000
+                    env:
+                        -   name: WIT_API_BASE_URL
+                            value: http://localhost:8000
